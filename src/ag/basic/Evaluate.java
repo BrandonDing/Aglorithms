@@ -4,7 +4,7 @@ import ag.utils.AglorithmsException;
 
 import java.util.Stack;
 
-public class EvaluateDemo {
+public class Evaluate {
 
 	public static void main(String[] args) {
 		System.out.println(eval("( 1 + ( ( 2 * 4 ) + ( 7 * ( 9 - 4 ) ) ) )"));
