@@ -16,6 +16,24 @@ public class ListStack<T> implements Iterable<T> {
 		this.first = new Node<T>(t);
 	}
 
+	public ListStack(ListStack<T> ls) {
+		if(ls.first == null){
+			this.n = 0;
+			this.first = null;
+		}else{
+			this.n = ls.size();
+			this.first = new Node<T>(ls.first.t, null);
+			Node<T> from = ls.first;
+			Node<T> to = this.first;
+			while(from.next != null){
+				from = from.next;
+				Node<T> temp = new Node<T>(from.t, null);
+				to.next = temp;
+				to = temp;
+			}
+		}
+	}
+
 	public int size() {
 		return n;
 	}
@@ -82,6 +100,10 @@ public class ListStack<T> implements Iterable<T> {
 
 	public static void main(String[] args) {
 		ListStack<String> ls = new ListStack<String>();
+
+		ListStack<String> copy1 = new ListStack<String>(ls);
+		System.out.println("end");
+
 		String expression = "to be or not to be - that is - - - a question - - - - - - - to be or not to be - - - ";
 		for (String e : expression.split(" ")) {
 			if (e.equals("-")) {
@@ -94,6 +116,9 @@ public class ListStack<T> implements Iterable<T> {
 				System.out.println(ls.size());
 			}
 		}
+
+		ListStack<String> copy2 = new ListStack<String>(ls);
+		System.out.println("end");
 	}
 
 }

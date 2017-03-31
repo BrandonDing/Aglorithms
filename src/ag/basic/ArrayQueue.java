@@ -15,6 +15,15 @@ public class ArrayQueue<T> implements Iterable<T> {
 		this.tail = 0;
 	}
 
+	public ArrayQueue(ArrayQueue<T> aq) {
+		this.a = (T[]) new Object[aq.length()];
+		this.head = aq.head;
+		this.tail = aq.tail;
+		for (int i = 0; i < tail - head; i++) {
+			a[head + i] = aq.a[head + i];
+		}
+	}
+
 	public int size() {
 		return tail - head;
 	}
@@ -93,6 +102,19 @@ public class ArrayQueue<T> implements Iterable<T> {
 		return new QueueIterator();
 	}
 
+	@Override
+	public String toString(){
+		String elements = "Size:" + size() + ";Elements:[" ;
+		for (int i = 0; i < tail -head; i++) {
+			elements = elements + a[head + i].toString() + ",";
+		}
+		if(tail -head > 0){
+			elements = elements.substring(0, elements.length() - 1);
+		}
+		elements = elements + "]";
+		return elements;
+	}
+
 	public static void main(String[] args) {
 		ArrayQueue<String> fs = new ArrayQueue<String>(100);
 		String expression = "to be or not to be - that is - - - a question - - - - - - - - - - to be or not to be - - ";
@@ -106,6 +128,10 @@ public class ArrayQueue<T> implements Iterable<T> {
 				System.out.println(fs.length());
 			}
 		}
+
+		ArrayQueue<String> copy = new ArrayQueue<String>(fs);
+		System.out.println(copy.toString());
+
 	}
 
 }
